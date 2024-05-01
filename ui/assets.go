@@ -9,7 +9,7 @@ import (
 )
 
 // Assets hold the alice-lg frontend build
-//go:embed build/*
+//go:embed public/*
 var Assets embed.FS
 
 // AssetsHTTPHandler handles HTTP request at a specific prefix.
@@ -27,8 +27,8 @@ func AssetsHTTPHandler(prefix string) http.Handler {
 		}
 
 		// Rewrite path
-		reqPath = path.Join("build/", reqPath)
-		rawPath = path.Join("build/", rawPath)
+		reqPath = path.Join("public/", reqPath)
+		rawPath = path.Join("public/", rawPath)
 
 		// This is pretty much like the StripPrefix middleware,
 		// from net/http, however we replace the prefix with `build/`.

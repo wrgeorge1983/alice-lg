@@ -1,0 +1,10 @@
+global:
+  config:
+    as: 65006
+    router-id: 176.16.32.69
+    port: 179
+
+neighbors:
+  - config:
+      neighbor-address: 192.168.100.6
+      peer-as: 65006

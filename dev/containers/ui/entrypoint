@@ -1,15 +1,19 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ##########################################################
 # Start an arbitrary command or start the dev server
 # and ensure all dependencies are installed.
 ###########################################################
 
+echo "Starting UI container"
+
 cd /ui
 
 CMD=$1
 shift
 ARGS=$@
+
+echo "Running command: $CMD $ARGS"
 
 case "$CMD" in
     start)

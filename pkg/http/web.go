@@ -45,7 +45,7 @@ func (s *Server) webRegisterAssets(
 	log.Println("Preparing and installing assets")
 
 	// Prepare client html: Rewrite paths
-	indexHTMLData, err := ui.Assets.ReadFile("build/index.html")
+	indexHTMLData, err := ui.Assets.ReadFile("public/index.html")
 	if err != nil {
 		return err
 	}

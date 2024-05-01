@@ -12,6 +12,8 @@ services:
       POSTGRES_DB: alice 
     ports:
       - 5432:5432
+    networks:
+      - aliceDev
 
   ui:
     build:
@@ -25,6 +27,8 @@ services:
       - 3000:3000
     command:
       - start 
+    networks:
+      - aliceDev
 
   backend:
     build: 
@@ -32,7 +36,34 @@ services:
       context: ../.
     volumes:
       - ../.:/src/alice-lg
+      - ../etc/alice-lg:/etc/alice-lg
+      # - ../ui/public:/build
     ports:
-      - 7340:7340
+      - 8080:8080
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    networks:
+      - aliceDev
+
+
+  bgp:
+    image: jauderho/gobgp:latest
+
+    ports:
+      - "179:179"
+      - "50051:50051"
+
+    volumes:
+      - ./gobgpd.yml:/etc/gobgpd/gobgpd.yml
+    command: ["gobgpd", "-t", "yaml", "-f", "/etc/gobgpd/gobgpd.yml"]
+    networks:
+      - aliceDev
+
+
+networks:
+  aliceDev:
+    name: "aliceDev"
+    ipam: 
+      driver: default
+      config:
+        - subnet: 192.168.58.0/24
