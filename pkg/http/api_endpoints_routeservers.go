@@ -8,7 +8,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 
 	"github.com/alice-lg/alice-lg/pkg/api"
-	"github.com/alice-lg/alice-lg/pkg/config"
+	// "github.com/alice-lg/alice-lg/pkg/config"
 )
 
 // Handle RouteServers List
@@ -65,7 +65,7 @@ func (s *Server) apiRouteServerStatusShow(
 		return nil, err
 	}
 	if result != nil {
-		result.Meta.Version = config.Version
+		// result.Meta.Version = config.Version
 	}
 
 	return result, nil
