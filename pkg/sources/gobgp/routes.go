@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"sort"
 	"time"
 
 	gobgpapi "github.com/osrg/gobgp/v3/api"
@@ -221,6 +222,14 @@ func (gobgp *GoBGP) GetRoutes(
 			}
 		}
 	}
+
+	sort.Slice(response.Filtered, func(i, j int) bool {
+		return response.Filtered[i].Network < response.Filtered[j].Network
+	})
+
+	sort.Slice(response.Imported, func(i, j int) bool {
+		return response.Imported[i].Network < response.Imported[j].Network
+	})
 
 	return nil
 }

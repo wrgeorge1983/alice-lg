@@ -175,6 +175,9 @@ func (gobgp *GoBGP) Neighbors(
 		if err == io.EOF {
 			break
 		}
+		if err != nil {
+			return nil, err
+		}
 
 		neigh := api.Neighbor{}
 
